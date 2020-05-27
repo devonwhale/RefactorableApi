@@ -7,10 +7,10 @@ using RefactorableApi.Models;
 
 namespace RefactorableApi.Managers
 {
-    public class BasketManager
+    public class BasketManager : BasketInterface
     {
-        public BasketDataAccess bda;
-        public BasketManager() { bda = new BasketDataAccess(); }
+        public DataAccessInterface bda;
+        public BasketManager(DataAccessInterface newBda) { bda = newBda; }
 
 
         public BasketContents Get(string basketId)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RefactorableApi.DataAccess
 {
-    interface DataAccessInterface
+    public interface DataAccessInterface
     {
         dynamic Get(string id);
 

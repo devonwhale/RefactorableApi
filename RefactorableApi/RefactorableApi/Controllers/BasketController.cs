@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RefactorableApi.DataAccess;
 using RefactorableApi.Exceptions;
 using RefactorableApi.Managers;
 using RefactorableApi.Models;
@@ -15,11 +16,13 @@ namespace RefactorableApi.Controllers
     [ApiController]
     public class BasketController : ControllerBase
     {
-        public BasketManager basketManager;
+        public BasketInterface basketManager;
+        public DataAccessInterface basketDataAccess;
 
-        public BasketController()
+        public BasketController(BasketInterface bi, DataAccessInterface bda)
         {
-            basketManager = new BasketManager();
+            basketManager = bi;
+            basketDataAccess = bda;
         }
 
         [HttpGet("{id}", Name = "Get")]
@@ -36,10 +39,10 @@ namespace RefactorableApi.Controllers
             return new StatusCodeResult(500);
         }
 
-        [HttpPatch("{id}", Name = "Save")]
+        [HttpPatch("{id}", Name = "Add")]
         public IActionResult Patch(string id, [FromBody] Item newItem)
         {
-            return Ok(basketManager.bda.Add(id, newItem));
+            return Ok(basketDataAccess.Add(id, newItem));
         }
 
         [HttpDelete("{id}/{id2}")]

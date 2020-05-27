@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RefactorableApi.DataAccess;
+using RefactorableApi.Managers;
 
 namespace RefactorableApi
 {
@@ -31,6 +33,9 @@ namespace RefactorableApi
            {
                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Api", Version = "v1" });
            });
+
+            services.AddSingleton(typeof(BasketInterface), typeof(BasketManager));
+            services.AddSingleton(typeof(DataAccessInterface), typeof(BasketDataAccess));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

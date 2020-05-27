@@ -10,8 +10,6 @@ namespace RefactorableApi.DataAccess
 {
     public class BasketDataAccess : DataAccessInterface
     {
-        private static List<Item> _spoofBasket;
-
         public BasketDataAccess()
         {
             SpoofSetup();
@@ -44,7 +42,7 @@ namespace RefactorableApi.DataAccess
 
         private void SpoofSetup()
         {
-            _spoofBasket = new List<Item> {
+            SpoofPersistance.Basket = new List<Item> {
                 new Item { ID = "1234", Name = "Screwdriver", Price = 7.95d},
                 new Item { ID = "8", Name = "Compost", Price = 9.99d},
                 new Item { ID = "43", Name = "The Telagraph and Argus", Price = 0.85d},
@@ -55,22 +53,22 @@ namespace RefactorableApi.DataAccess
         private BasketContents SpoofGetItems(string id)
         {
             SpoofErrors(id);
-            return new BasketContents(_spoofBasket, id);
+            return new BasketContents(SpoofPersistance.Basket, id);
         }
 
         private BasketContents SpoofAddItem(string id, Item item)
         {
             SpoofErrors(id);
-            _spoofBasket.Add(item);
-            return new BasketContents(_spoofBasket, id);
+            SpoofPersistance.Basket.Add(item);
+            return new BasketContents(SpoofPersistance.Basket, id);
         }
 
         private BasketContents SpoofRemoveItem(string basketId, string idToRemove)
         {
             SpoofErrors(basketId);
             SpoofItemErrors(idToRemove);
-            _spoofBasket.RemoveAll(x => x.ID == idToRemove);
-            return new BasketContents(_spoofBasket, basketId);
+            SpoofPersistance.Basket.RemoveAll(x => x.ID == idToRemove);
+            return new BasketContents(SpoofPersistance.Basket, basketId);
         }
 
         private void SpoofErrors(string id)
