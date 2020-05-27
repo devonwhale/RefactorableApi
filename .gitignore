@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/RefactorableApi/.vs/RefactorableApi
+/RefactorableApi/RefactorableApi/bin/Debug/netcoreapp3.1
+/RefactorableApi/RefactorableApi/obj
