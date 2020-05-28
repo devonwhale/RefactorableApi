@@ -43,10 +43,10 @@ namespace RefactorableApi.DataAccess
         private void SpoofSetup()
         {
             SpoofPersistance.Basket = new List<Item> {
-                new Item { ID = "1234", Name = "Screwdriver", Price = 7.95d},
-                new Item { ID = "8", Name = "Compost", Price = 9.99d},
-                new Item { ID = "43", Name = "The Telagraph and Argus", Price = 0.85d},
-                new Item { ID = "778", Name = "Freddo (Multipack)", Price = 17.5d}
+                new Item { ID = "1234", Name = "Screwdriver", Price = 7.95d, Vat = true},
+                new Item { ID = "8", Name = "Compost", Price = 9.99d, Vat = true},
+                new Item { ID = "43", Name = "The Telagraph and Argus", Price = 0.85d, Vat = false},
+                new Item { ID = "778", Name = "Freddo (Multipack)", Price = 17.5d, Vat = false}
             };
         }
 

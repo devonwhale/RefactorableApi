@@ -13,7 +13,7 @@ namespace RefactorableApi.Models
 
         public double Price { get; set; }
 
-        private bool Vat;
+        public bool Vat { set; get; }
 
         public void SetVat(bool vat) 
         {
