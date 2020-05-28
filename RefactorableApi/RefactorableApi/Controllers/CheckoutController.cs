@@ -33,7 +33,7 @@ namespace RefactorableApi.Controllers
             {
                 return Ok(coManager.MakePayment(id));
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new StatusCodeResult(400);
             }

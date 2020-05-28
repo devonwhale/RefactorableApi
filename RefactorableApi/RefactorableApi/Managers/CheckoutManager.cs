@@ -18,6 +18,7 @@ namespace RefactorableApi.Managers
         {
             cdb = new CheckoutDataAccess();
             ba = newBasketInterface;
+            pProv = new PaymentProvider();
         }
 
         public bool MakePayment(string basketId)

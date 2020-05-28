@@ -26,7 +26,7 @@ namespace RefactorableApi.ThirdPartyServices
 
         private async Task<Guid> SpoofTakePayment(PaymentRequest request)
         {
-            Thread.Sleep(1000);
+            await Task.Run(() => Thread.Sleep(1000));
             return Guid.NewGuid();
         }
     }
