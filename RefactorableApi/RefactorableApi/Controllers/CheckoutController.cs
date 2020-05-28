@@ -18,6 +18,14 @@ namespace RefactorableApi.Controllers
             coManager = icm;
         }
 
+        [HttpGet("{id}/TotalCost")]
+        public IActionResult TotalCost(string id)
+        {
+            var cost = coManager.CalculateBasketValue(id);
+
+            return Ok(Math.Truncate(cost*100)/100);
+        }
+
         [HttpPut("{id}")]
         public IActionResult MakePayment(string id)
         {

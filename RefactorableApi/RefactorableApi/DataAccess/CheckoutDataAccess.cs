@@ -7,19 +7,50 @@ namespace RefactorableApi.DataAccess
 {
     public class CheckoutDataAccess : DataAccessInterface
     {
+        /// <summary>
+        /// Saves that a transaction has happened
+        /// </summary>
+        /// <param name="id">Seems to be required</param>
+        /// <param name="newItem">The transaction id we want to keep a record of.</param>
+        /// <returns>Nothing</returns>
         public dynamic Add(string id, dynamic newItem)
         {
-            throw new NotImplementedException();
+            SpoofPaymentSave(newItem);
+
+            return null;
         }
 
+        /// <summary>
+        /// Shouldn't ever be called
+        /// </summary>
+        /// <param name="id">Shouldn't ever be used</param>
+        /// <param name="id2">Shouldn't ever be used</param>
         public void Delete(string id, string id2)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the VAT rate for a provided item ID
+        /// </summary>
+        /// <param name="id">The item ID</param>
+        /// <returns>Something</returns>
         public dynamic Get(string id)
         {
-            throw new NotImplementedException();
+            var rate = SpoofVatLookup(id);
+            if (rate > 1 && rate < 100) rate = rate / 100;
+            return rate;
+        }
+
+        private double SpoofVatLookup(string id) //Yes I know id isn't used but it looks more realistic...
+        {
+            var potentialVatRates = new double[] { 20, 5, 7.25};
+            return potentialVatRates[new Random().Next(potentialVatRates.Length)];
+        }
+
+        private void SpoofPaymentSave(string transactionId)
+        {
+            // Record of payment saved!
         }
     }
 }

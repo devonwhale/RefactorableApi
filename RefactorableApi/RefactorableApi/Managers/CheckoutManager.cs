@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RefactorableApi.DataAccess;
 using RefactorableApi.Models;
+using RefactorableApi.ThirdPartyServices;
 
 namespace RefactorableApi.Managers
 {
@@ -11,6 +12,7 @@ namespace RefactorableApi.Managers
     {
         protected DataAccessInterface cdb;
         protected BasketInterface ba;
+        protected PaymentProvider pProv;
 
         public CheckoutManager(BasketInterface newBasketInterface)
         {
@@ -22,14 +24,31 @@ namespace RefactorableApi.Managers
         {
             var basket = ba.Get(basketId);
 
-            var cost = CalculateBasketValue(basket);
+            var cost = CalculateBasketValue(basketId);
+
+            pProv.TakePayment(basketId, cost);
 
             return true;
         }
 
-        public double CalculateBasketValue(BasketContents basket)
+        public double CalculateBasketValue(string basketId)
         {
-            return 17.5;
+            var value = new double();
+
+            var basket = ba.Get(basketId);
+
+            foreach (Item itemInBasket in basket)
+            {
+                    if (!itemInBasket.GetVat()) //Item is not exempt from VAT. Don't forget to add it!
+                    {
+                        var vatRate = cdb.Get(itemInBasket.ID);
+                        value = value + (itemInBasket.Price * (1+vatRate));
+                        continue;
+                    }
+                    value = value + itemInBasket.Price;
+            }
+
+            return value;
         }
     }
 }
