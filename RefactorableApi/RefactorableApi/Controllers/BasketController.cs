@@ -25,7 +25,7 @@ namespace RefactorableApi.Controllers
             basketDataAccess = bda;
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
             try
@@ -39,7 +39,7 @@ namespace RefactorableApi.Controllers
             return new StatusCodeResult(500);
         }
 
-        [HttpPatch("{id}", Name = "Add")]
+        [HttpPatch("{id}")]
         public IActionResult Patch(string id, [FromBody] Item newItem)
         {
             return Ok(basketDataAccess.Add(id, newItem));

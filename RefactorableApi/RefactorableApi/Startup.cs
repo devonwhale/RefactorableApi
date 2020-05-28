@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RefactorableApi.Controllers;
 using RefactorableApi.DataAccess;
 using RefactorableApi.Managers;
 
@@ -35,6 +36,7 @@ namespace RefactorableApi
            });
 
             services.AddSingleton(typeof(BasketInterface), typeof(BasketManager));
+            services.AddSingleton(typeof(ICheckoutManager), typeof(CheckoutManager));
             services.AddSingleton(typeof(DataAccessInterface), typeof(BasketDataAccess));
         }
 
