@@ -44,8 +44,7 @@ namespace RefactorableApi.DataAccess
 
         private double SpoofVatLookup(string id) //Yes I know id isn't used but it looks more realistic...
         {
-            var potentialVatRates = new double[] { 20, 5, 7.25};
-            return potentialVatRates[new Random().Next(potentialVatRates.Length)];
+            return 20;
         }
 
         private void SpoofPaymentSave(string transactionId)
